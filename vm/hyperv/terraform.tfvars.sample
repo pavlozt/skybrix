@@ -1,0 +1,10 @@
+hyperv_user                = "admin"
+hyperv_password            = ""
+hyperv_host                = "127.0.0.1"
+image_id            = "debian-13-genericcloud"
+provider_opts = {
+  hyperv_path_prefix         = "c:\\vm"
+  hyperv_root_images         = "c:\\vm\\root-images"
+  hyperv_cloudinit_disks     = "с:\\vm\\cloud-init-iso"
+  hyperv_network_switch_name = "Default switch"
+}

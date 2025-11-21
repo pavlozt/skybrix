@@ -1,0 +1,5 @@
+admin_public_key_file = "~/.ssh/id_rsa.pub"
+size = "small"
+image_family = "ubuntu-24-04-x64"
+ssh_key_fingerprint = "aa:aa:aa:bb:bb:bb:cc:cc:cc:cc:dd:dd:dd:dd:dd:dd"
+do_token = ""

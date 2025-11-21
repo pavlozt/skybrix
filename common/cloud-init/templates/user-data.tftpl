@@ -1,0 +1,52 @@
+#cloud-config
+users:
+  - name: root
+    lock_passwd: false
+%{ if ssh_allow_root ~}
+%{ if hashed_passwd != null ~}
+    hashed_passwd: ${hashed_passwd}
+%{endif ~}
+    ssh_authorized_keys:
+      - ${file(ssh_public_key_file)}
+%{ endif ~}
+  - name: ${ssh_username}
+%{ if hashed_passwd != null ~}
+    hashed_passwd: ${hashed_passwd}
+%{endif ~}
+    ssh_authorized_keys:
+      - ${file(ssh_public_key_file)}
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: users,admin,wheel
+    lock_passwd: false
+    shell: /bin/bash
+%{ if ssh_allow_root != null ~}
+disable_root: false
+%{ else ~}
+disable_root: true%
+%{ endif ~}
+ssh_pwauth: ${ssh_allow_passwords ? "true" : "false"}
+package_upgrade: false
+%{ if all_inclusive ~}
+timezone: Europe/Moscow
+locale: en_US
+package_update: true
+%{ else ~}
+package_update: false
+%{endif ~}
+packages:
+%{ for pkg in os_specific_packages ~}
+  - ${pkg}
+%{ endfor ~}
+
+%{ if all_inclusive ~}
+  - git
+  - mc
+  - rsync
+%{endif ~}
+%{ if force_network ~}
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+%{ endif ~}

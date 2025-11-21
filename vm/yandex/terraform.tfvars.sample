@@ -1,0 +1,7 @@
+admin_public_key_file = "~/.ssh/id_rsa.pub"
+yandex_token  = ""
+yandex_cloud_id = ""
+yandex_folder_id = ""
+
+size = "small"
+image_family = "ubuntu-24-04-x64"

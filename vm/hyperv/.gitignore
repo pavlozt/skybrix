@@ -1,0 +1,3 @@
+cloud-init-data/**
+!cloud-init-data/.gitkeep
+!cloud-init-data/readme.txt

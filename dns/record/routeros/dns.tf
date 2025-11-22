@@ -3,4 +3,5 @@ resource "routeros_dns_record" "a_record" {
   zone_id = data.cloudflare_zone.cf_zone.zone_id
   address = var.ip
   type    = "A"
+  ttl     = 60
 }

@@ -8,14 +8,19 @@ run "plan" {
       {
         name         = "frontend-01"
         ip           = "10.0.1.5"
-        ssh_username = "ops"
-      },
+        ssh_username = "ops",
+     },
       {
         name         = "backend-01"
         ip           = "10.0.2.5"
         ssh_username = "ec2-user"
       }
     ]
+    hosts_vars = {
+      "frontend-01" = {
+        "hostname_full" = "frontend.domain.local"
+      } 
+    }
   }
 
   assert {

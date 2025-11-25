@@ -34,10 +34,10 @@ variable "image_family" {
   default     = "ubuntu-24-04-x64"
 }
 
-variable "environment" {
-  description = "Environment"
+variable "name_suffix" {
+  description = "Name suffix for separate environments"
   type        = string
-  default     = "dev"
+  default     = ""
 }
 
 variable "name" {

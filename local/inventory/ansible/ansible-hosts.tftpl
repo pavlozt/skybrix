@@ -6,4 +6,8 @@ all:
       hosts:%{ for host in hosts }
         ${host.name}:
           ansible_host: ${host.ip}
-          ansible_user: ${host.ssh_username}%{ endfor }
+          ansible_user: ${host.ssh_username}%{ if try(hosts_vars[host.name], null) != null }
+%{ for key, value in hosts_vars[host.name] ~}
+          ${key}: ${value}%{ endfor ~}
+%{ endif ~}
+%{ endfor ~}

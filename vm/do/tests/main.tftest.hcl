@@ -27,10 +27,11 @@ run "create_vm" {
     size                = "small"
     ssh_public_key_file = "~/.ssh/id_rsa.pub"
     image_family        = "ubuntu-24-04-x64"
+    name_suffix         = "tf-test"
   }
 
   assert {
-    condition     = digitalocean_droplet.vm.name == "${run.setup.pet}-dev"
+    condition     = digitalocean_droplet.vm.name == "${run.setup.pet}-tf-test"
     error_message = "VM name does not match expected pattern"
   }
   assert {

@@ -19,12 +19,19 @@ variable "groupname" {
   default     = "web"
 }
 
+variable "hosts_vars" {
+  description = "Map of host names to their variables"
+  type        = map(map(string))
+  default     = {}
+}
+
 
 resource "local_file" "ansible_hosts_file" {
   filename = var.inventory_file
   content = templatefile("${path.module}/ansible-hosts.tftpl", {
     hosts     = var.hosts
     groupname = var.groupname
+    hosts_vars = var.hosts_vars
   })
   file_permission = "0644"
 }

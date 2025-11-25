@@ -4,4 +4,4 @@ yandex_cloud_id = ""
 yandex_folder_id = ""
 
 size = "small"
-image_family = "ubuntu-24-04-x64"
+image_family = "ubuntu-24-04-lts"

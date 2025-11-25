@@ -45,9 +45,10 @@ run "create_vm" {
     low_cost            = true
     size                = "small"
     ssh_public_key_file = "~/.ssh/id_rsa.pub"
+    name_suffix         = "tf-test"
   }
   assert {
-    condition     = yandex_compute_instance.vm.name == "${run.setup.pet}-dev"
+    condition     = yandex_compute_instance.vm.name == "${run.setup.pet}-tf-test"
     error_message = "VM name does not match expected pattern"
   }
   assert {

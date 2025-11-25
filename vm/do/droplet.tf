@@ -1,9 +1,9 @@
 resource "digitalocean_droplet" "vm" {
   image  = var.image_family
-  name   = "${var.name}-${var.environment}"
+  name        = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name
   region = var.region
   size   = local.final_slug
-  tags   = ["env:${var.environment}"]
+  tags   = ["env:${var.name_suffix}"]
   // This should suppress password creation and sending to email.
   ssh_keys = [var.ssh_key_fingerprint]
   user_data = templatefile(

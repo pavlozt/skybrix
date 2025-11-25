@@ -33,11 +33,10 @@ variable "image_id" {
   default     = null
 }
 
-
-variable "environment" {
-  description = "Environment"
+variable "name_suffix" {
+  description = "Name suffix for separate environments"
   type        = string
-  default     = "dev"
+  default     = ""
 }
 
 variable "name" {

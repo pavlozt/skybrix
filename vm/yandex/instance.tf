@@ -11,10 +11,10 @@ data "yandex_vpc_subnet" "default_subnet" {
 }
 
 resource "yandex_compute_instance" "vm" {
-  name        = "${var.name}-${var.environment}"
-  hostname    = "${var.name}-${var.environment}"
+  name        = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name
+  hostname    = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name
+  labels      = { "env" = "${var.name_suffix}" }
   platform_id = local.platform
-  labels      = { "env" = "${var.environment}" }
   zone        = var.yandex_zone
 
   resources {

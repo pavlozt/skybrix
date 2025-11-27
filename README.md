@@ -24,9 +24,9 @@ SkyBrix provides a set of reusable Terraform modules designed to simplify comple
 
 ```hcl
 module "vm" {
-  source       = "github.com/pavlozt/skybrix//vm/yandex?ref=v0.0.1"
+  source       = "github.com/pavlozt/skybrix//vm/yandex"
   // change to another provder:
-  // source       = "github.com/pavlozt/skybrix//vm/do?ref=v0.0.1"
+  // source       = "github.com/pavlozt/skybrix//vm/do"
   name         = "vm"
   size         = "small"
   image_family = var.image_family
@@ -37,15 +37,15 @@ module "vm" {
 
 // Ansible static inventory file
 module "inventory_dev" {
-  source    = "github.com:/pavlozt/skybrix//local/inventory/ansible?ref=v0.0.1"
+  source    = "github.com:/pavlozt/skybrix//local/inventory/ansible"
   groupname = "servers"
   inventory_file = "../hosts/dev/inventory.yaml"
-  hosts          = [module.vm.host_info]
+  hosts          = [module.vm.host_info] // or create ip list from other modules output
 }
 
 // DNS record management
 module "dns_control" {
-  source      = "github.com/pavlozt/skybrix.git//dns/record/cloudflare?ref=v0.0.1"
+  source      = "github.com/pavlozt/skybrix.git//dns/record/cloudflare"
   name        = "control"
   ip          = module.vm.host_info.ip
   zone_name   = var.zone_name

@@ -23,7 +23,7 @@ resource "yandex_compute_instance" "vm" {
     core_fraction = local.core_fraction
   }
   scheduling_policy {
-    preemptible = true
+    preemptible = var.low_cost ? true : false
   }
   boot_disk {
     initialize_params {

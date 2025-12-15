@@ -1,6 +1,6 @@
 resource "digitalocean_droplet" "vm" {
   image  = var.image_family
-  name        = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name
+  name   = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name
   region = var.region
   size   = local.final_slug
   tags   = ["env:${var.name_suffix}"]

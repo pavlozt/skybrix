@@ -28,10 +28,17 @@ variable "slug" {
     error_message = "Slug format should match patterns like 's-1vcpu-1gb' or 'c-2vcpu-4gb'."
   }
 }
+
 variable "image_family" {
   description = "Droplet image"
   type        = string
   default     = "ubuntu-24-04-x64"
+}
+
+variable "image_id" {
+  description = "Dummy variable for interface compatibility with other modules. DigitalOcean does not support exact image id."
+  type        = string
+  default     = null
 }
 
 variable "name_suffix" {

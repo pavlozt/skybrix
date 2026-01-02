@@ -3,10 +3,9 @@
 SkyBrix provides a set of reusable Terraform modules designed to simplify complex and diverse environments, including public clouds and on-premise hypervisors, through a single consistent interface. These pre-built components allow for the quick and effortless deployment of short-lived environments, which are ideal for cloud testing scenarios.
 
 ## Key Benefits:
--  Consistent API across all infrastructure providers.
--  Minimal code changes when switching between clouds or on-premise. Just replace path to modules.
 -  Unified configuration patterns.
 -  Rapid prototyping across different environments.
+-  Minimal code changes when switching between clouds or on-premise. Just replace path to modules.
 
 ## Supported Providers
 
@@ -16,8 +15,8 @@ SkyBrix provides a set of reusable Terraform modules designed to simplify comple
 - **[Hyper-V](vm/hyperv)** - Virtual Machines (with cloud-init .iso support)
 
 ### DNS Providers
-- **[Cloudflare](dns/record/cloudflare/)** - DNS management
-- **[RouterOS (Mikrotik)](dns/record/routeros/)** - Router operating system with DNS capabilities
+- **[Cloudflare](dns/record/cloudflare/)** - DNS management (without proxing)
+- **[RouterOS (Mikrotik)](dns/record/routeros/)** - Router operating system with DNS server support
 
 
 ## Example Usage
@@ -29,7 +28,8 @@ module "vm" {
   // source       = "github.com/pavlozt/skybrix//vm/do"
   name         = "vm"
   size         = "small"
-  image_family = var.image_family
+  // OS images, however, may be named differently among different providers.
+  image_family = "ubuntu-24-04-lts"
   ssh_username   = "ops"
   provider_opts       = var.provider_opts
   admin_public_key_file = "~/.ssh/id_rsa.pub"

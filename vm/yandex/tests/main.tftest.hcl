@@ -44,7 +44,7 @@ run "create_vm" {
     name                = run.setup.pet
     low_cost            = true
     size                = "small"
-    ssh_public_key_file = "~/.ssh/id_rsa.pub"
+    ssh_public_key_file = "~/.ssh/id_ed25519.pub"
     name_suffix         = "tf-test"
   }
   assert {

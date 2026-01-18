@@ -32,7 +32,7 @@ module "vm" {
   image_family = "ubuntu-24-04-lts"
   ssh_username   = "ops"
   provider_opts       = var.provider_opts
-  admin_public_key_file = "~/.ssh/id_rsa.pub"
+  admin_public_key_file = "~/.ssh/id_ed25519.pub"
 }
 
 // Ansible static inventory file

@@ -19,7 +19,7 @@ resource "local_file" "user_data" {
       all_inclusive        = var.all_inclusive
       hashed_passwd        = var.hashed_passwd
       os_specific_packages = local.os_specific_packages
-      force_network        = true
+      force_network        = true // TODO ??
     }
   )
   filename        = "${local.cloud_init_data_dir}/user-data"

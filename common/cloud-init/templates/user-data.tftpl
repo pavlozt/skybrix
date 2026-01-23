@@ -43,10 +43,3 @@ packages:
   - mc
   - rsync
 %{endif ~}
-%{ if force_network ~}
-network:
-  version: 2
-  ethernets:
-    eth0:
-      dhcp4: true
-%{ endif ~}

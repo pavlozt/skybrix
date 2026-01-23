@@ -93,3 +93,13 @@ variable "provider_opts" {
   type        = any
   default     = {}
 }
+
+
+variable "extra_disks" {
+  description = "Additional disks"
+  type = map(object({
+    size = number
+    type = string
+  }))
+  default = {}
+}

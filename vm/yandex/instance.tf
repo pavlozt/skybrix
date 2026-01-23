@@ -33,6 +33,14 @@ resource "yandex_compute_instance" "vm" {
     }
   }
 
+  dynamic "secondary_disk" {
+    for_each = yandex_compute_disk.extra_disk
+    content {
+      disk_id = secondary_disk.value.id
+      # auto_delete = true
+    }
+  }
+
   network_interface {
     nat       = true
     subnet_id = data.yandex_vpc_subnet.default_subnet.id

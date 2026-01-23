@@ -1,14 +1,3 @@
-locals {
-  notes = "Managed by Terraform. Based on image ${var.image_id}."
-  // TODO : add labels for project, environment , etc
-}
-
-resource "hyperv_vhd" "os_disk" {
-  path        = "${var.provider_opts.hyperv_path_prefix}\\${var.name}\\${var.name}_root.vhdx"
-  vhd_type    = "Differencing"
-  parent_path = "${var.provider_opts.hyperv_root_images}\\${var.image_id}.vhdx"
-}
-
 resource "hyperv_machine_instance" "vm" {
   name                 = "${var.name}-${var.environment}"
   notes                = local.notes

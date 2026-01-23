@@ -13,4 +13,8 @@ locals {
   # Final parameters
   cores  = local.params.cores
   memory = local.params.memory
+
+  notes = "Managed by Terraform. Based on image ${var.image_id}."
+  // TODO : add labels for project, environment , etc
+
 }

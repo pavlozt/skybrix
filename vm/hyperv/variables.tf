@@ -78,6 +78,15 @@ variable "low_cost" {
   default     = false
 }
 
+variable "extra_disks" {
+  description = "Additional disks"
+  type = map(object({
+    size = number
+    type = string
+  }))
+  default = {}
+}
+
 variable "provider_opts" {
   description = <<DESC
 Hyper-V provider additional configuration parameters.

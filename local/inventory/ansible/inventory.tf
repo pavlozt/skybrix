@@ -5,6 +5,11 @@ variable "hosts" {
     ip           = string
     ssh_username = string
   }))
+  # Validation to ensure the IP field is not an empty string
+  validation {
+    condition     = alltrue([for h in var.hosts : h.ip != ""])
+    error_message = "The IP address for each host is mandatory and cannot be empty."
+  }
 }
 
 variable "inventory_file" {

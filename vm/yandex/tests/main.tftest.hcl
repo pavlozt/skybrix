@@ -47,7 +47,7 @@ run "create_vm" {
     ssh_public_key_file = "~/.ssh/id_ed25519.pub"
     name_suffix         = "tf-test"
     extra_disks = {
-      "data" = { size = 5,  type = "network-ssd" },
+      "data" = { size = 5, type = "network-ssd" },
       "logs" = { size = 10, type = "network-hdd" }
     }
   }

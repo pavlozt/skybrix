@@ -26,6 +26,23 @@ resource "hyperv_machine_instance" "vm" {
     path                = hyperv_vhd.os_disk.path
   }
 
+  # Extra disks (Starting from Location 2)
+  # We use dynamic block to iterate over the extra_disk resource map
+  dynamic "hard_disk_drives" {
+    for_each = [for i, k in keys(var.extra_disks) : {
+      index = i
+      key   = k
+    }]
+
+    content {
+      controller_type   = "Scsi"
+      controller_number = "0"
+      # Start from location 2, so we add 2 to the current iteration index
+      controller_location = hard_disk_drives.value.index + 2
+      path                = hyperv_vhd.extra_disk[hard_disk_drives.value.key].path
+    }
+  }
+
   # cloud-init drive
   dvd_drives {
     controller_number   = "0"

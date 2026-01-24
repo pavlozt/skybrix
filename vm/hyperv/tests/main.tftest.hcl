@@ -86,7 +86,7 @@ run "create_vm" {
     error_message = "vm status not matched"
   }
   assert {
-    condition     = length(hyperv_machine_instance.vm.hard_disk_drives) == 1
+    condition     = length(hyperv_machine_instance.vm.hard_disk_drives) == 3
     error_message = "VM should have exactly one hard disk drive"
   }
   assert {

@@ -1,0 +1,24 @@
+pm_api_url          = "https://127.0.0.1:8006/api2/json"
+pm_api_token_id     = "terraform-prov@pve!mytoken"
+pm_tls_insecure     = true
+
+ssh_public_key_file = "~/.ssh/id_ed25519.pub"
+name                = "tf-module-test"
+image_id            = "debian-12-standard_12.12-1_amd64.tar.zst"
+
+ipv4_address = "192.168.50.201/24"
+ipv4_gateway = "192.168.50.1"
+
+size = "tiny"
+
+extra_disks = {
+  "data" = { size = 2, type = "slowcontainers", mountpoint = "/data/" },
+  "logs" = { size = 3, type = "slowcontainers", mountpoint = "/data2/" }
+}
+
+provider_opts = {
+  pm_target_node         = "pvedzzzr"
+  pm_root_disk_storage   = "slowcontainers"
+  pm_template_storage    = "local"
+  pm_network_bridge_name = "vmbr1"
+}

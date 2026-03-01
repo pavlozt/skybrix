@@ -12,12 +12,15 @@ SkyBrix provides a set of reusable Terraform modules designed to simplify comple
 ### Compute Providers
 - **[Yandex Cloud](vm/yandex/)** - Virtual Machines
 - **[Digital Ocean](vm/do/)** - Droplets
-- **[Hyper-V](vm/hyperv)** - Virtual Machines (with cloud-init .iso support)
+- **[Hyper-V](vm/hyperv/)** - Virtual Machines (with cloud-init .iso support)
+- **[Proxmox PVE](container/proxmox/)** - Proxmox PVE LXC Containers
 
 ### DNS Providers
 - **[Cloudflare](dns/record/cloudflare/)** - DNS management (without proxing)
 - **[RouterOS (Mikrotik)](dns/record/routeros/)** - Router operating system with DNS server support
 
+## Inventory
+- **[Ansible YAML Inventory](local/inventory/ansible/)** - ansible inventory files used in combination with others modules
 
 ## Example Usage
 

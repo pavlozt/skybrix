@@ -9,7 +9,7 @@ run "plan" {
         name         = "frontend-01"
         ip           = "10.0.1.5"
         ssh_username = "ops",
-     },
+      },
       {
         name         = "backend-01"
         ip           = "10.0.2.5"
@@ -19,7 +19,10 @@ run "plan" {
     hosts_vars = {
       "frontend-01" = {
         "hostname_full" = "frontend.domain.local"
-      } 
+      }
+    }
+    groups_hierarchy = {
+      "production" = ["web"]
     }
   }
 
@@ -36,6 +39,21 @@ run "plan" {
   assert {
     condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children[var.groupname])
     error_message = "Group '${var.groupname}' was not found in the inventory."
+  }
+
+  assert {
+    condition     = length(yamldecode(local_file.ansible_hosts_file.content).all.children[var.groupname].hosts) == 2
+    error_message = "Group '${var.groupname}' should contain exactly 2 hosts."
+  }
+
+  assert {
+    condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children["production"])
+    error_message = "Parent group 'production' was not found in the inventory."
+  }
+
+  assert {
+    condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children["production"].children["web"])
+    error_message = "Group 'web' is not listed as a child of 'production'."
   }
 
 }

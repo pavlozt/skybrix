@@ -31,7 +31,7 @@ resource "proxmox_lxc_guest" "container" {
     }
   }
   root_mount {
-    size    = "${local.params.boot_disk_size}G"
+    size    = "${local.boot_disk_size}G"
     storage = var.provider_opts.pm_root_disk_storage
   }
   memory             = local.memory * 1024

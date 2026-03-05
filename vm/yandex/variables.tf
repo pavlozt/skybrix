@@ -15,6 +15,29 @@ variable "size" {
     error_message = "The 'size' value must be one of: tiny, small, medium, large."
   }
 }
+variable "cpu" {
+  description = "Manual CPU override. Takes priority over 'size'."
+  type        = number
+  default     = null
+}
+
+variable "memory" {
+  description = "Manual RAM override (GB). Takes priority over 'size'."
+  type        = number
+  default     = null
+}
+
+variable "boot_disk_size" {
+  description = "Manual boot disk size override (GB). Takes priority over 'size' preset."
+  type        = number
+  default     = null
+}
+
+variable "boot_disk_type" {
+  description = "Disk type (e.g., network-hdd, network-ssd). Takes priority over 'size' preset."
+  type        = string
+  default     = null
+}
 
 variable "low_cost" {
   description = "Low cost instance"

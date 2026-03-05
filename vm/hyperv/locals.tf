@@ -10,10 +10,14 @@ locals {
   selected_size = var.size != null ? var.size : "small"
   params        = local.size_params[local.selected_size]
 
-  # Final parameters
-  cores          = local.params.cores
-  memory         = local.params.memory
-  boot_disk_size = local.params.boot_disk_size
+  # Safe preset selection. Defaults to "small" if var.size is null
+  selected_preset = coalesce(var.size, "small")
+  preset_params   = lookup(local.size_params, local.selected_preset, {})
+
+  # Logic: Variable Override > Preset Value > Hardcoded Default
+  cores          = coalesce(var.cpu, try(local.preset_params.cores, 2))
+  memory         = coalesce(var.memory, try(local.preset_params.memory, 2))
+  boot_disk_size = coalesce(var.boot_disk_size, try(local.preset_params.boot_disk_size, 20))
 
 
   notes = "Managed by Terraform. Based on image ${var.image_id}."

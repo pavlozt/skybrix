@@ -15,6 +15,24 @@ variable "size" {
   }
 }
 
+variable "cpu" {
+  description = "Manual CPU override. Takes priority over 'size'."
+  type        = number
+  default     = null
+}
+
+variable "memory" {
+  description = "Manual RAM override (GB). Takes priority over 'size'."
+  type        = number
+  default     = null
+}
+
+variable "boot_disk_size" {
+  description = "Manual boot disk size override (GB). Takes priority over 'size' preset."
+  type        = number
+  default     = null
+}
+
 variable "image_family" {
   type        = string
   description = "Ignored"

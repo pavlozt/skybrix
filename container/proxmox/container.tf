@@ -3,7 +3,8 @@ resource "proxmox_lxc_guest" "container" {
   name            = var.name
   power_state     = "running"
   target_node     = var.provider_opts.pm_target_node
-  unprivileged    = true
+  unprivileged    = var.privileged ? null : true
+  privileged      = var.privileged ? true : null
   password        = ""
   ssh_public_keys = file(pathexpand(var.ssh_public_key_file))
   template {
@@ -13,9 +14,25 @@ resource "proxmox_lxc_guest" "container" {
   cpu {
     cores = local.cores
   }
-  features {
-    unprivileged {
-      nesting = true
+
+  dynamic "features" {
+    for_each = [1]
+    content {
+// temporary disable
+/*
+      dynamic "privileged" {
+        for_each = var.privileged ? [1] : []
+        content {
+          nesting = true
+        }
+      }
+*/
+      dynamic "unprivileged" {
+        for_each = var.privileged ? [] : [1]
+        content {
+          nesting = true
+        }
+      }
     }
   }
 

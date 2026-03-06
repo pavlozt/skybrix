@@ -12,8 +12,8 @@ locals {
 
   # Logic: Variable Override > Preset Value
   # coalesce returns the first non-null value
-  cores  = coalesce(var.cpu, local.preset_params.cores)
-  memory = coalesce(var.memory, local.preset_params.memory)
+  cores          = coalesce(var.cpu, local.preset_params.cores)
+  memory         = coalesce(var.memory, local.preset_params.memory)
   boot_disk_size = coalesce(var.boot_disk_size, local.preset_params.boot_disk_size)
 
 }

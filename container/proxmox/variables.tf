@@ -61,6 +61,12 @@ variable "ssh_allow_passwords" {
   default     = false
 }
 
+variable "privileged" {
+  description = "Privileged container"
+  type        = bool
+  default     = false
+}
+
 variable "provider_opts" {
   description = <<DESC
 Proxmox provider additional configuration parameters.

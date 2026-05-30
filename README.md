@@ -27,7 +27,7 @@ SkyBrix provides a set of reusable Terraform modules designed to simplify comple
 ```hcl
 module "vm" {
   source       = "github.com/pavlozt/skybrix//vm/yandex"
-  // change to another provder:
+  // change to another provider:
   // source       = "github.com/pavlozt/skybrix//vm/do"
   name         = "vm"
   size         = "small"

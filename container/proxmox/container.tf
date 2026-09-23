@@ -18,8 +18,8 @@ resource "proxmox_lxc_guest" "container" {
   dynamic "features" {
     for_each = [1]
     content {
-// temporary disable
-/*
+      // temporary disable
+      /*
       dynamic "privileged" {
         for_each = var.privileged ? [1] : []
         content {

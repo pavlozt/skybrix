@@ -1,14 +1,8 @@
 provider "yandex" {
-  token       = var.yandex_token
   cloud_id    = var.yandex_cloud_id
   folder_id   = var.yandex_folder_id
   zone        = var.yandex_zone
   max_retries = 3
-}
-
-variable "yandex_token" {
-  type        = string
-  description = "YandexCloud token"
 }
 
 variable "yandex_cloud_id" {
@@ -88,7 +82,5 @@ run "create_vm" {
     error_message = "user-data does not contain '#cloud-config' string"
   }
 }
-
-
 
 

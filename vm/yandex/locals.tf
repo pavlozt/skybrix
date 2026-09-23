@@ -1,9 +1,9 @@
 locals {
   size_params = {
-    tiny   = { cores = 2, memory = 1, boot_disk_size = 20, platform = "standard-v4a", core_fraction = 50,  boot_disk_type = "network-hdd" }
+    tiny   = { cores = 2, memory = 1, boot_disk_size = 20, platform = "standard-v4a", core_fraction = 50, boot_disk_type = "network-hdd" }
     small  = { cores = 2, memory = 2, boot_disk_size = 20, platform = "standard-v4a", core_fraction = 100, boot_disk_type = "network-hdd" }
-    medium = { cores = 4, memory = 4, boot_disk_size = 20, platform = "standard-v4a", core_fraction = 100, boot_disk_type = "network-ssd" }
-    large  = { cores = 4, memory = 8, boot_disk_size = 20, platform = "standard-v4a", core_fraction = 100, boot_disk_type = "network-ssd" }
+    medium = { cores = 4, memory = 4, boot_disk_size = 32, platform = "standard-v4a", core_fraction = 100, boot_disk_type = "network-ssd" }
+    large  = { cores = 4, memory = 8, boot_disk_size = 32, platform = "standard-v4a", core_fraction = 100, boot_disk_type = "network-ssd" }
   }
 
   # Safe preset selection. If var.size is null or not in the map,

@@ -7,8 +7,9 @@ data "yandex_vpc_network" "default_network" {
 }
 
 data "yandex_vpc_subnet" "default_subnet" {
-  name = "default-ru-central1-a"
+  name = "default-${var.yandex_zone}"
 }
+
 
 resource "yandex_compute_instance" "vm" {
   name        = var.name_suffix != "" ? "${var.name}-${var.name_suffix}" : var.name

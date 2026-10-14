@@ -1,7 +1,7 @@
 variable "yandex_zone" {
   description = "Yandex Cloud Zone"
   type        = string
-  default     = "ru-central1-a"
+  default     = "ru-central1-d"
 }
 
 variable "size" {

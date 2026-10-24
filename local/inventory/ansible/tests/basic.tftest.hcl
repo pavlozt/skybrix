@@ -1,6 +1,6 @@
-
 run "plan" {
   command = apply
+
   variables {
     inventory_file = "./testfile.yaml"
     groupname      = "web"
@@ -8,7 +8,7 @@ run "plan" {
       {
         name         = "frontend-01"
         ip           = "10.0.1.5"
-        ssh_username = "ops",
+        ssh_username = "ops"
       },
       {
         name         = "backend-01"
@@ -37,5 +37,4 @@ run "plan" {
     condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children[var.groupname])
     error_message = "Group '${var.groupname}' was not found in the inventory."
   }
-
 }

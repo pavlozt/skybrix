@@ -26,13 +26,13 @@ variable "groupname" {
 
 variable "groups_hierarchy" {
   description = "Defines parent-child relationships between groups"
-  type        = map(list(string)) # Key is parent group, value is list of children
+  type        = map(list(string))
   default     = {}
   # Example: { "web_all" = ["frontend", "backend"], "production" = ["web_all"] }
 }
 
 variable "extra_groups" {
-  description = "Map of additional group names to lists of host names"
+  description = "Map of additional group names to list of host names. Only hosts present in var.hosts are kept."
   type        = map(list(string))
   default     = {}
 }

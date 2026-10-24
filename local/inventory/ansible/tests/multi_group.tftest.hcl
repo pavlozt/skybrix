@@ -1,6 +1,6 @@
-
 run "plan" {
   command = apply
+
   variables {
     inventory_file = "./testfile.yaml"
     groupname      = "web"
@@ -8,7 +8,7 @@ run "plan" {
       {
         name         = "frontend-01"
         ip           = "10.0.1.5"
-        ssh_username = "ops",
+        ssh_username = "ops"
       },
       {
         name         = "backend-01"
@@ -23,6 +23,10 @@ run "plan" {
     }
     groups_hierarchy = {
       "production" = ["web"]
+    }
+    extra_groups = {
+      docker = ["frontend-01"]
+      db     = ["backend-01"]
     }
   }
 
@@ -56,4 +60,13 @@ run "plan" {
     error_message = "Group 'web' is not listed as a child of 'production'."
   }
 
+  assert {
+    condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children["docker"])
+    error_message = "Group 'docker' was not found in the inventory."
+  }
+
+  assert {
+    condition     = can(yamldecode(local_file.ansible_hosts_file.content).all.children["db"])
+    error_message = "Group 'db' was not found in the inventory."
+  }
 }

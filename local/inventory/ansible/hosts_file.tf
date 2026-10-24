@@ -3,8 +3,24 @@ locals {
   all_group_names = distinct(concat(
     [var.groupname],
     keys(var.groups_hierarchy),
-    flatten(values(var.groups_hierarchy))
+    flatten(values(var.groups_hierarchy)),
+    keys(var.extra_groups)
   ))
+
+  # Normalize extra groups by host name.
+  # Accepts:
+  #   extra_groups = { docker = ["host1", "host2"] }
+  #   extra_groups = { docker = [module.vm.host_info] }
+  extra_groups_data = {
+    for group_name, members in var.extra_groups : group_name => {
+      for member in members :
+      (can(member.name) ? member.name : tostring(member)) => {}
+      if contains(
+        [for h in var.hosts : h.name],
+        (can(member.name) ? member.name : tostring(member))
+      )
+    }
+  }
 
   # Prepare hosts data once
   all_hosts_data = {
@@ -24,9 +40,12 @@ locals {
       children = {
         for group in local.all_group_names : group => {
           # Use 'null' instead of '{}' to omit empty sections in YAML
-          hosts = group == var.groupname ? {
-            for h in var.hosts : h.name => {}
-          } : null
+          hosts = (group == var.groupname
+            ? { for h in var.hosts : h.name => {} }
+            : lookup(local.extra_groups_data, group, null) != null
+            ? local.extra_groups_data[group]
+            : null
+          )
 
           children = lookup(var.groups_hierarchy, group, null) != null ? {
             for child in var.groups_hierarchy[group] : child => {}
@@ -36,7 +55,7 @@ locals {
     }
   }
 
-  # Hacks for ansible :
+  # Hacks for ansible:
   # remove groups that ended up having neither hosts nor children
   inventory_data = {
     all = {
@@ -51,7 +70,7 @@ locals {
 
   # Generate YAML and cleanup
   # Regex to strip quotes from keys while preserving indentation
-  # Remove empty braces {} 
+  # Remove empty braces {}
   yaml_output = replace(
     replace(
       yamlencode(local.inventory_data),

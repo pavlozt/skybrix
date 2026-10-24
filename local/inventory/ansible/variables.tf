@@ -31,6 +31,12 @@ variable "groups_hierarchy" {
   # Example: { "web_all" = ["frontend", "backend"], "production" = ["web_all"] }
 }
 
+variable "extra_groups" {
+  description = "Map of additional group names to lists of host names"
+  type        = map(list(string))
+  default     = {}
+}
+
 variable "hosts_vars" {
   description = "Map of host names to their variables"
   type        = map(map(string))
